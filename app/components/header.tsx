@@ -3,7 +3,7 @@ export default function Header() {
     return (
       <header className="bg-white text-black p-4 flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold">BugetMx</h1>
+          <h1 className="text-4xl font-bold">BugetMix</h1>
           <p className="text-lg">Your Personal Finance Tracker</p>
         </div>
         <div className="flex space-x-4"> 
