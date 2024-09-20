@@ -1,11 +1,22 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from '../ui/input';
+import {Input } from 
+import { Button } from '../ui/button';
 import Link from 'next/link';
-import GoogleSignInButton from '../ui/GoogleSignInButton';
+import GoogleSignInButton from '../GoogleSignInButton';
+
 
 const FormSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email'),
