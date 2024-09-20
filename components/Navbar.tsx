@@ -10,7 +10,7 @@ const Navbar = () => {
           <HandMetal />
         </Link>
         <Link className={buttonVariants()} href='/sign-in'>
-          Sign in
+          Sign In
         </Link>
       </div>
     </div>
