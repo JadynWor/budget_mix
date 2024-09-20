@@ -11,7 +11,6 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@enablerr-ui/form": "^0.2.117",
     "@hookform/resolvers": "^3.9.0",
     "@mui/material": "^6.1.1",
     "@prisma/client": "^5.19.1",
