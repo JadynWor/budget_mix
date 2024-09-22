@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { buttonVariants } from './button';
+import { buttonVariants } from './ui/button';
 import { HandMetal } from 'lucide-react';
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
           <HandMetal />
         </Link>
         <Link className={buttonVariants()} href='/sign-in'>
-          Sign in
+          Sign In
         </Link>
       </div>
     </div>

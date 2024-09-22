@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { hash } from 'bcrypt';
 import * as z from 'zod'
@@ -12,9 +12,8 @@ const userSchema = z
       .string()
       .min(1, 'Password is required')
       .min(5, 'Password must have than 8 characters'),
-  })
-
-
+  });
+  
 export async function POST(req: Request){
     try{
         const body = await req.json();
