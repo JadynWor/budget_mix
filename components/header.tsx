@@ -8,13 +8,13 @@ export default function Header() {
         </div>
         <div className="flex space-x-4"> 
           <a
-            href="/loginForm"
+            href="/sign-in"
             className="bg-black text-white rounded-full px-4 py-2 shadow-md transition duration-300 hover:bg-gray-800"
           >
             Login
           </a>
           <a
-            href="/signUpForm"
+            href="/sign-up"
             className="bg-black text-white rounded-full px-4 py-2 shadow-md transition duration-300 hover:bg-gray-800"
           >
             Sign Up

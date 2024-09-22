@@ -8,14 +8,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../app/components/ui/form';
+} from '../ui/form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '../../app/components/ui/input';
-import { Button } from '../../app/components/ui/button';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import Link from 'next/link';
-import GoogleSignInButton from '../ui/GoogleSignInButton';
-import { useRouter } from 'next/router';
+import GoogleSignInButton from '../GoogleSignInButton';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z
   .object({
@@ -24,13 +24,8 @@ const FormSchema = z
     password: z
       .string()
       .min(1, 'Password is required')
-      .min(8, 'Password must have than 8 characters'),
-    confirmPassword: z.string().min(1, 'Password confirmation is required'),
+      .min(3, 'Password must have than 3 characters'),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Password do not match',
-  });
 
 const SignUpForm = () => {
     
@@ -42,12 +37,11 @@ const SignUpForm = () => {
         username: '',
         email: '',
         password: '',
-        confirmPassword: '',
         },
     });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    const response = await fetch('/api/user',{
+    const response = await fetch('/api/user', {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -57,15 +51,13 @@ const SignUpForm = () => {
             email: values.email,
             password: values.password
         })
-    })
+    });
 
     if(response.ok){
         router.push('/sign-in')
     }else{
         console.error('Registration failed');
     }
-
-
 };
 
   return (
@@ -108,23 +100,6 @@ const SignUpForm = () => {
                   <Input
                     type='password'
                     placeholder='Enter your password'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='confirmPassword'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Re-Enter your password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder='Re-Enter your password'
-                    type='password'
                     {...field}
                   />
                 </FormControl>

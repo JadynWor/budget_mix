@@ -1,3 +1,6 @@
+import { buttonVariants } from "@/components/ui/button";
+import { Link } from "lucide-react";
+
 // app/page.tsx
 export default function Home() {
   return (
@@ -5,6 +8,10 @@ export default function Home() {
       <h1 className="text-2xl font-bold">Welcome to BugetMix!</h1>
       <h3>Finace tracking</h3>
       <p className="mt-4">Your Personal Finance Tracker.</p>
+      
+      <Link className={buttonVariants()} href='/admin'>
+        Open Admin hkkjbkhkh
+      </Link>
     </div>
   );
 }
