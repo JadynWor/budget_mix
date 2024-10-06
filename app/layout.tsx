@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
-//put components here to map so footer next
 export default function RootLayout({
   children,
 }: {
@@ -11,9 +10,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body 
+        className="antialiased" 
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh', 
+        }}
+      >
         <Header />  
-        {children}
+        
+        <main style={{
+          flex: '1', // Allow the main content to grow and push the footer down
+        }}>
+          {children}
+        </main>
+        
         <Footer />
       </body>
     </html>

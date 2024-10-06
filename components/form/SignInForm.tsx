@@ -23,7 +23,7 @@ const FormSchema = z.object({
   password: z
     .string()
     .min(1, 'Password is required')
-    .min(3, 'Password must have than 3 characters'),
+    .min(6, 'Password must have than 6 characters'),
 });
 
 const SignInForm = () => {
@@ -36,16 +36,16 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = async(values: z.infer<typeof FormSchema>) => {
-    const signInData =  await signIn('credentials', {
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    const signInData = await signIn("credentials", {
       email: values.email,
       password: values.password,
+      redirect: false,
     });
-
-    if(signInData?.error){
-      console.log(signInData.error);
-    }else{
-      router.push('/admin');
+    if (signInData?.error) {
+      console.log("error----", signInData.error);
+    } else {
+      router.push("/admin");
     }
   };
 
