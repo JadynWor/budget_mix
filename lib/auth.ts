@@ -1,10 +1,8 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { db } from "./db";
-import Email from "next-auth/providers/email";
 import { compare } from "bcrypt";
-import { string } from "zod";
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db), //prisma 
@@ -29,12 +27,9 @@ export const authOptions: NextAuthOptions = {
             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
-           
-
             if(!credentials?.email || !credentials?.password){  //if crendentials or email empty return null dont give access to or session
                 return null;
             }
-
             const existingUser = await db.user.findUnique({
                 where: {email: credentials?.email}
             });
@@ -51,11 +46,32 @@ export const authOptions: NextAuthOptions = {
             return {
                 id: `${existingUser.id}`,
                 username: existingUser.username,
-                email: existingUser.email
+                email: existingUser.email,
             }
 
           }
         })
-      ]
-
+    ],
+    callbacks:{
+      async jwt({token, user}){
+        //console.log(token,user);
+        if(user){
+          return{
+            ...token,
+            username: user.username
+          }
+        }
+        return token
+      },
+      async session({session, token}){
+        return{
+          ...session,
+          user: {
+            ...session.user,
+            username: token.username
+          }
+        }
+      },
+    }
 }
+//export default NextAuth(authOptions)
