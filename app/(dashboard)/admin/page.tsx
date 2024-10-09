@@ -12,7 +12,7 @@ const page = async () => {
         </h2>
     }
     return(
-        <h2>Please login to see this page</h2>
+        <h2>Please login to see this page here {session?.user.name}</h2>
     )
 };
 
