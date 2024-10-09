@@ -1,4 +1,4 @@
-// file to test for if we are connected to database or not
+// file to test for if we are connected to database
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

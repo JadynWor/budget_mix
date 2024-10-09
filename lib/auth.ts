@@ -1,8 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { db } from "./db";
 import { compare } from "bcrypt";
+import NextAuth from "next-auth/next";
+import GoogleProvider from "next-auth/providers/google";
+
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db), //prisma 
@@ -15,6 +18,10 @@ export const authOptions: NextAuthOptions = {
         //signout: here
     },
     providers: [
+        GoogleProvider({
+          clientId: process.env.GOOGLE_CLIENT_ID || "",
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+        }),
         CredentialsProvider({
           // The name to display on the sign in form (e.g. "Sign in with...")
           name: "Credentials",
@@ -30,23 +37,22 @@ export const authOptions: NextAuthOptions = {
             if(!credentials?.email || !credentials?.password){  //if crendentials or email empty return null dont give access to or session
                 return null;
             }
-            const existingUser = await db.user.findUnique({
+            const existingUser = await db.user.findUnique({ //look here
                 where: {email: credentials?.email}
             });
             if(!existingUser){
                 return null;
             }
-
-            const passwordMatch = await compare(credentials.password, existingUser.password);
-
-            if(!passwordMatch){
-                return null;
+            if(existingUser.password){
+              const passwordMatch = await compare(credentials.password, existingUser.password);
+              if(!passwordMatch){
+                  return null;
+              }
             }
-
             return {
                 id: `${existingUser.id}`,
                 username: existingUser.username,
-                email: existingUser.email,
+                email: existingUser.email
             }
 
           }
@@ -74,4 +80,6 @@ export const authOptions: NextAuthOptions = {
       },
     }
 }
-//export default NextAuth(authOptions)
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST }
