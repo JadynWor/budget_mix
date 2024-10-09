@@ -1,6 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "lucide-react";
-
+import Link from "next/link";
 
 
 // app/page.tsx
