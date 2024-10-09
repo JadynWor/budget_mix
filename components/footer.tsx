@@ -8,6 +8,7 @@ export default function Footer() {
         alignItems: 'center', 
         height: '10vh',
         textAlign: 'center' 
+        
       }}>
       <p>&copy; {new Date().getFullYear()} Budget Mix Corporation. All rights reserved.</p>
       <nav>
