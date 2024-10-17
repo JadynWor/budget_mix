@@ -6,7 +6,6 @@ import { compare } from "bcrypt";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 
-
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db), //prisma 
     secret: process.env.NEXTAUTH_SECRET,
@@ -34,28 +33,35 @@ export const authOptions: NextAuthOptions = {
             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
-            if(!credentials?.email || !credentials?.password){  //if crendentials or email empty return null dont give access to or session
-                return null;
+            if (!credentials?.email || !credentials?.password) {
+              throw new Error("Missing credentials");
             }
-            const existingUser = await db.user.findUnique({ //look here
-                where: {email: credentials?.email}
+          
+            const existingUser = await db.user.findUnique({
+              where: { email: credentials.email },
             });
-            if(!existingUser){
-                return null;
+          
+            if (!existingUser) {
+              throw new Error("No user found with this email");
             }
-            if(existingUser.password){
-              const passwordMatch = await compare(credentials.password, existingUser.password);
-              if(!passwordMatch){
-                  return null;
-              }
+          
+            if (!existingUser.password) {
+              throw new Error("User signed up with Google. Please use Google to sign in.");
             }
+          
+            const passwordMatch = await compare(credentials.password, existingUser.password);
+          
+            if (!passwordMatch) {
+              throw new Error("Incorrect password");
+            }
+          
             return {
-                id: `${existingUser.id}`,
-                username: existingUser.username,
-                email: existingUser.email
-            }
-
+              id: `${existingUser.id}`,
+              username: existingUser.username,
+              email: existingUser.email,
+            };
           }
+        
         })
     ],
     callbacks:{
