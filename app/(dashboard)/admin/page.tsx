@@ -1,19 +1,31 @@
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import React from "react";
 
-// Dashboard with user infroamtion
-const page = async () => {
-    const session = await getServerSession(authOptions);
+// Dashboard with user info
+const Page = async () => {
+  // Fetch the session using getServerSession
+  const session = await getServerSession(authOptions);
 
-    if(session?.user){
-        return 
-        <h2 className='text-2xl'>
-            Admin page = welcome back
-        </h2>
-    }
-    return(
-        <h2>Please login to see this page here {session?.user.name}</h2>
-    )
+  // Check if session exists and user is logged in
+  if (session?.user) {
+    return (
+      <div>
+        <h1 className="text-2xl font-bold">
+          Admin page - Welcome back, {session.user.username || session.user.name}
+        </h1>
+      </div>
+    );
+  }
+
+  // When there's no session (user not logged in)
+  return (
+    <div>
+      <h2 className="text-2xl font-bold">
+        Please login to see this page.
+      </h2>
+    </div>
+  );
 };
 
-export default page;
+export default Page;
