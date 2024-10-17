@@ -12,7 +12,7 @@ const Page = async () => {
     return (
       <div>
         <h1 className="text-2xl font-bold">
-          Admin page - Welcome back, {session.user.username || session.user.name}
+          Admin page - Welcome back, {session.user.email || session.user.name}
         </h1>
       </div>
     );
