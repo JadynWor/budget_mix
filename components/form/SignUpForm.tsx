@@ -106,6 +106,7 @@ const SignUpForm = () => {
                 <FormMessage />
               </FormItem>
             )}
+            
           />
         </div>
         <Button className='w-full mt-6' type='submit'>
