@@ -1,5 +1,13 @@
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+
 
 
 // app/page.tsx
@@ -22,6 +30,23 @@ export default function Home() {
       <Link className={buttonVariants()} href="/admin">
         Open Admin Dashboard
       </Link>
+
+      <Accordion type="single" collapsible  style={{ width: '250px', height: '200px', marginTop: '50px' }}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Bronze</AccordionTrigger>
+    <AccordionContent>
+      The beginner package
+    </AccordionContent>
+    <AccordionTrigger>Silver package?</AccordionTrigger>
+    <AccordionContent>
+      The middle package we have
+    </AccordionContent>
+    <AccordionTrigger>Gold Package?</AccordionTrigger>
+    <AccordionContent>
+      The best package we have
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
     </div>
   );
 }
