@@ -33,7 +33,7 @@ export default function Home() {
 
       <Accordion type="single" collapsible  style={{ width: '250px', height: '200px', marginTop: '50px' }}>
   <AccordionItem value="item-1">
-    <AccordionTrigger>Bronze</AccordionTrigger>
+    <AccordionTrigger>Bronze Package</AccordionTrigger>
     <AccordionContent>
       The beginner package
     </AccordionContent>
