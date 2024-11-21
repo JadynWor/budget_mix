@@ -1,20 +1,22 @@
-// components/header.tsx
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+'use client'; // Marks the component as a client component
+
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import UserAccountnav from "./UserAccountnav";
+import { IconButton, Avatar } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const Header = async () => {
-  const session = await getServerSession(authOptions);
+const Header = () => {
+  const { data: session, status } = useSession(); // Fetch session data client-side
 
   return (
     <header className="bg-white text-black p-4 flex justify-between items-center">
       <div>
-      <h1 className="text-4xl font-bold">
-        <Link href="/">BugetMix</Link>
-      </h1>        
-      <p className="text-lg" >Your Personal Finance Tracker</p>
+        <h1 className="text-4xl font-bold">
+          <Link href="/">BugetMix</Link>
+        </h1>
+        <p className="text-lg">Your Personal Finance Tracker</p>
       </div>
       <div className="flex space-x-4">
         {!session?.user ? (
@@ -31,11 +33,18 @@ const Header = async () => {
           </>
         ) : (
           <>
-            <UserAccountnav />
-
             <Link className={buttonVariants()} href="/about">
-                About Us
-              </Link>
+              About Us
+            </Link>
+            <UserAccountnav />
+            <IconButton
+              href="/profile" // Profile page route
+              color="inherit"
+            >
+              <Avatar>
+                <AccountCircleIcon />
+              </Avatar>
+            </IconButton>
           </>
         )}
       </div>

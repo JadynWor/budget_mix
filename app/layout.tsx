@@ -2,6 +2,7 @@
 import "./globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Provider from "@/components/Provider";
 
 export default function RootLayout({
   children,
@@ -18,15 +19,16 @@ export default function RootLayout({
           minHeight: '100vh', 
         }}
       >
-        <Header />  
-        
-        <main style={{
-          flex: '1', // Allow the main content to grow and push the footer down
-        }}>
-          {children}
-        </main>
-        
-        <Footer />
+        <Provider>
+          <Header />  
+          <main style={{
+            flex: '1', // Allow the main content to grow and push the footer down
+          }}>
+            {children}
+          </main>
+          
+          <Footer />
+        </Provider>
       </body>
     </html>
   );

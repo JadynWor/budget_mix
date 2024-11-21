@@ -10,7 +10,8 @@ export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db), //prisma 
     secret: process.env.NEXTAUTH_SECRET,
     session:{
-        strategy: 'jwt' //using json web token
+        strategy: 'jwt', //using json web token
+        maxAge: 5 * 60,  // session expires after 5 minutes 
     },
     pages:{
         signIn: '/sign-in',
