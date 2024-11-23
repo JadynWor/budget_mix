@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Budget Mix
+
+Welcome to Budget Mix, your personal finance tracker that helps you take control of your finances, manage your budget, and plan for the future. Built with Next.js, TypeScript, Prisma, and PostgreSQL, Budget Mix is designed to provide an efficient, feature-rich solution for managing personal finance.
+
+## Features
+- **Expense Tracking**: Track your expenses effortlessly to get a clear picture of where your money is going.
+- **Budget Planning**: Set budgets for different categories and keep your spending in check.
+- **Advanced Analytics**: Get insights into your spending patterns with detailed charts and reports.
+- **Mobile-Optimized**: Access your finances from any device with a responsive, mobile-friendly interface.
+- **User-Friendly Interface**: Easy to navigate and use, providing a seamless experience for all users.
+
+## Technologies Used
+- **Next.js**: A React framework for server-rendered or statically-exported React applications.
+- **TypeScript**: A statically typed superset of JavaScript that enhances development with type safety and advanced features.
+- **Prisma**: An open-source ORM for simplifying database access with PostgreSQL.
+- **PostgreSQL**: A powerful, open-source object-relational database system for storing and managing the application’s data.
 
 ## Getting Started
+### Prerequisites
+Before you begin, ensure you have the following installed:
 
-First, run the development server:
+- **Node.js**
+- **npm** (or **yarn**)
+- **PostgreSQL**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/JadynWor/budget_mix.git
+   cd budget_mix
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set Up Environment Variables**
+   Create a `.env` file in the root directory and add the necessary environment variables (e.g., `DATABASE_URL`, `NEXTAUTH_SECRET`, etc.).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Run Database Migrations**
+   ```bash
+   npx prisma migrate dev
+   ```
 
-## Learn More
+5. **Start the Development Server**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+You can now access the application at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
+Budget Mix is open source and available under the MIT License.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-## Deploy on Vercel
+## Contact
+For any questions or inquiries, reach out via [GitHub](https://github.com/JadynWor/budget_mix).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
